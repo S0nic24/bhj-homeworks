@@ -1,14 +1,15 @@
-const reveals = document.querySelectorAll('.reveal');
+const rotators = document.querySelectorAll('.rotator');
 
-function checkReveal() {
-  reveals.forEach((element) => {
-    const rect = element.getBoundingClientRect();
+rotators.forEach((rotator) => {
+  const cases = rotator.querySelectorAll('.rotator__case');
+  let index = 0;
 
-    if (rect.top < window.innerHeight && rect.bottom > 0) {
-      element.classList.add('reveal_active');
-    }
-  });
-}
+  setInterval(() => {
+    cases.forEach((caseItem) => {
+      caseItem.classList.remove('rotator__case_active');
+    });
 
-window.addEventListener('scroll', checkReveal);
-checkReveal();
+    index = (index + 1) % cases.length;
+    cases[index].classList.add('rotator__case_active');
+  }, 1000);
+});
